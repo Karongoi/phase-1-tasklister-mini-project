@@ -1,29 +1,20 @@
-console.log("DEBUG: index.js is loaded!");
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("create-task-form");
+    const taskList = document.getElementById("tasks");
 
-const form = document.getElementById("create-task-form");
-const taskList = document.getElementById("tasks");
+    if (form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault(); // Prevent page reload
 
-console.log("DEBUG: Form found?", form);
-console.log("DEBUG: Task list element found?", taskList);
+            const taskInput = document.getElementById("new-task-description");
 
-if (form) {
-    form.addEventListener("submit", (event) => {
-        event.preventDefault(); // Prevent page reload
+            if (taskInput.value.trim() !== "") {
+                const newTask = document.createElement("li");
+                newTask.textContent = taskInput.value.trim(); // Ensure proper text insertion
+                taskList.appendChild(newTask); // Append task to the list
+            }
 
-        const taskInput = document.getElementById("new-task-description").value;
-
-        if (taskInput.trim() !== "") {
-            const newTask = document.createElement("li");
-            newTask.innerText = taskInput; // Fixing text insertion
-
-            setTimeout(() => {
-                taskList.appendChild(newTask);
-                console.log("DEBUG: Task added to DOM.", taskInput);
-            }, 10); // Ensure task is added before test checks it
-        }
-
-        form.reset(); // Clear input after submission
-    });
-} else {
-    console.error("ERROR: Form element not found!");
-}
+            taskInput.value = ""; // Clear input after submission
+        });
+    }
+});
