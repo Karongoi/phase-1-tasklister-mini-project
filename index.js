@@ -1,33 +1,30 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const taskForm = document.getElementById("create-task-form");  // The form
-    const taskInput = document.getElementById("new-task-description");  // The input field
-    const taskList = document.getElementById("tasks");  // The ul where tasks will appear
+describe('Handling form submission', () => {
+    let form;
+    let formInput;
+    let taskList;
   
-    // Event listener for form submission
-    taskForm.addEventListener("submit", function(event) {
-      event.preventDefault();  // Prevents the default form submission
+    beforeEach(() => {
+      form = document.querySelector('#create-task-form');
+      formInput = document.querySelector('#new-task-description');
+      taskList = document.querySelector('#tasks');
+    });
   
-      const newTask = taskInput.value.trim();  // Get the value from input field
+    it('should add a task to the task list when submitted', (done) => {
+      // Simulate user input
+      formInput.value = 'Wash the dishes';
   
-      if (newTask) {
-        // Create a new li element for the task
-        const li = document.createElement("li");
-        li.textContent = newTask;
+      // Dispatch submit event
+      form.dispatchEvent(new dom.window.Event('submit', { bubbles: true }));
   
-        // Optionally, add a delete button to each task
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.addEventListener("click", function() {
-          li.remove();  // Removes the task when clicked
-        });
-        li.appendChild(deleteButton);
+      // Use setImmediate to wait for the DOM update asynchronously
+      setImmediate(() => {
+        // Ensure the LI gets added
+        const task = taskList.querySelector("li");
+        expect(task).to.not.be.null;
+        expect(task.textContent).to.equal("Wash the dishes");
   
-        // Append the new task to the list
-        taskList.appendChild(li);
-  
-        // Clear the input field after submitting
-        taskInput.value = "";
-      }
+        done(); // Notify Mocha that the test is complete
+      });
     });
   });
   
