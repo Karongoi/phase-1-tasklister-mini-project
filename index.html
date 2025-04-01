@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskLister</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskLister</title>
 </head>
 <body>
-    <h1>TaskLister</h1>
-    <form id="create-task-form">
-        <input type="text" id="new-task-description" placeholder="Enter a task" />
-        <button type="submit">Add Task</button>
-    </form>
-    <ul id="tasks"></ul>
+  <h1>TaskLister</h1>
 
-    <script src="src/index.js"></script>
+  <!-- Task input form -->
+  <form id="create-task-form" action="#" method="POST">
+    <label for="new-task-description">Task description:</label>
+    <input
+      type="text"
+      id="new-task-description"
+      name="new-task-description"
+      placeholder="Enter a new task"
+    />
+    <input type="submit" value="Create New Task" />
+  </form>
+
+  <!-- List of tasks -->
+  <ul id="tasks"></ul>
+
+  <!-- Link to the external JavaScript file -->
+  <script src="./src/index.js"></script>
 </body>
 </html>
