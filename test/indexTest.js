@@ -7,7 +7,7 @@ const { JSDOM } = require('jsdom');
 const babel = require('@babel/core');
 
 // Load HTML content
-const html = fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf-8');
+const html = fs.readFileSync(path.resolve(__dirname, '..', 'src/index.html'), 'utf-8');
 
 // Transform JavaScript using Babel
 const { code: transformedScript } = babel.transformFileSync(
